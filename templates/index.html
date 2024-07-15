@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Counter</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1 class="text-center" id="heading">Personal Counters</h1>
+    <!----Counter 1---->
+    <h2 class="text-left" id="heading" align="left">Retention Counter</h2>
+    <div class="project-counter-wrp">
+        <ul>
+            <li>
+                <i class="fa fa-smile-o"></i>
+                <p id="1.1" class="number"></p>
+                <span></span>
+                <p>Current Day</p>
+            </li>
+            <li>
+                <i class="fa fa-calendar"></i>
+                <p id="1.2" class="number"></p>
+                <span></span>
+                <p>Days To Go</p>
+            </li>
+            <li>
+                <i class="fa fa-percent"></i>
+                <p id="1.3" class="number"></p>
+                <span></span>
+                <p>Progress So Far</p>
+            </li>
+        </ul>
+    </div>
+    <div class="w3-light-grey">
+        <div class="w3-pink" style="height:24px" id="1.4"></div>
+    </div>
+
+    <script>
+        function prodCalc(date) {
+            var d1 = new Date(date);   
+            var d2 = new Date();   
+            var diff = d2.getTime() - d1.getTime();       
+            return diff / (1000 * 60 * 60 * 24);
+        }
+
+        function percetageDays(date) {
+            var d1 = new Date(date);   
+            var d2 = new Date();           
+            var diff = d2.getTime() - d1.getTime();       
+            var daydiff = diff / (1000 * 60 * 60 * 24); 
+            return (Math.floor(daydiff + 1) / 90) * 100;  
+        }
+
+        // Counter 1
+        let dateOne = '{{ date_one }}';
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("1.1").innerHTML = Math.floor(prodCalc(dateOne) + 1);
+            document.getElementById("1.2").innerHTML = Math.floor(90 - prodCalc(dateOne)); 
+            document.getElementById("1.3").innerHTML = percetageDays(dateOne).toFixed(2);
+            document.getElementById("1.4").style.width = percetageDays(dateOne) + '%';
+        });
+    </script>
+</body>
+
+</html>
