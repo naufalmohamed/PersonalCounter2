@@ -18,7 +18,7 @@
 
     <h1 class="text-center" id="heading">Personal Counters</h1>
     <!----Counter 1---->
-    <h2 class="text-left" id="heading" align="left">Retention Counter</h2>
+    <h2 class="text-left" id="heading" align="left">{{ counter_name }}</h2>
     <div class="project-counter-wrp">
         <ul>
             <li>
@@ -63,7 +63,7 @@
 
         // Counter 1
         let dateOne = '{{ date_one }}';
-	let target = '{{ target }}'
+        let target = '{{ target }}'
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("1.1").innerHTML = Math.floor(prodCalc(dateOne) + 1);
             document.getElementById("1.2").innerHTML = Math.floor(target - prodCalc(dateOne)); 
